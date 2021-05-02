@@ -6,5 +6,10 @@ public class Tester {
         tree.add(4);
         tree.add(9);
         tree.toString();
+
+    }
+
+
+
     }
 }
