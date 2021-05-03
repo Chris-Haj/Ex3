@@ -5,21 +5,6 @@ public class BTree <E>{
         root=null;
     }
 
-    private int findMax(int a, int b){
-        if(a >= b)
-            return a;
-        else
-            return b;
-    }
-
-    private int findHeight(Node root){
-        // Base case:
-        if(root == null)
-            return 0;
-
-        return findMax(findHeight(root.getLeftSon()), findHeight(root.getRightSon())) + 1;
-    }
-
     public void add(E d){
         if(root.getLeftSon().equals(null)) {
             root.setLeftSon((Node<E>) d);
@@ -29,15 +14,24 @@ public class BTree <E>{
             root.setRightSon((Node<E>) d);
             return;
         }
-        int left=0,right=0;
-        for(int i=0;root.getLeftSon()==null;){
-            if(root.getLeftSon()!=null)
-                left++;
-            if(root.getRightSon()!=null)
-                right++;
+
+        if(Math.abs(recursiveHeight(root.getLeftSon()) - recursiveHeight(root.getRightSon()) <= 1)) {
+            root = root.getLeftSon();
+            add(d);
+        }
+        else {
+            root = root.getLeftSon();
+            add(d);
         }
 
+    }
 
+    private int recursiveHeight(Node<E> node){
+        if(node.getLeftSon()==null)
+            return 0;
+        else{
+            return 1+recursiveHeight(node.getLeftSon());
+        }
     }
 
     public String pre(){
@@ -47,6 +41,14 @@ public class BTree <E>{
 
     public String in(){
 
+
+    }
+    private String prv(Node left,Node right){
+        if(left.getLeftSon()&&left.getRightSon()&&right.getLeftSon()&&right.getRightSon())
+            return "";
+        else{
+
+        }
     }
 
     public String post(){
@@ -54,8 +56,12 @@ public class BTree <E>{
     }
 
     public int height(){
-
-    }
+        int height=0;
+        for(;root.getLeftSon()!=null;root= root.getLeftSon()){
+            height++;
+        }
+        return height;
+        }
     public int size(){
 
     }
