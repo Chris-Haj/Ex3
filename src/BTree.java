@@ -6,21 +6,22 @@ public class BTree <E>{
     }
 
     public void add(E d){
-        if(root.getLeftSon().equals(null)) {
-            root.setLeftSon((Node<E>) d);
+
+        if(root.getLeftSon()==(null)) {
+            root.setLeftSon(new Node<E>(d));
             return;
         }
-        if(root.getRightSon().equals(null)) {
-            root.setRightSon((Node<E>) d);
+        if(root.getRightSon()==(null)) {
+            root.setRightSon(new Node<E>(d));
             return;
         }
 
-        if(Math.abs(recursiveHeight(root.getLeftSon()) - recursiveHeight(root.getRightSon()) <= 1)) {
+        if(Math.abs(recursiveHeight(root.getLeftSon()) - recursiveHeight(root.getRightSon()))<=1) {
             root = root.getLeftSon();
             add(d);
         }
         else {
-            root = root.getLeftSon();
+            root = root.getRightSon();
             add(d);
         }
 
@@ -35,29 +36,8 @@ public class BTree <E>{
     }
 
     public String pre(){
-
-
-    }
-
-    private int[] preorder(Node<E> node, int i){
-
-
-    }
-
-    public String in(){
-
-
-    }
-    private String prv(Node left,Node right){
-        if(left.getLeftSon()&&left.getRightSon()&&right.getLeftSon()&&right.getRightSon())
-            return "";
-        else{
-
-        }
-    }
-
-    public String post(){
-
+        String ordered="";
+        
     }
 
     public int height(){
@@ -67,8 +47,9 @@ public class BTree <E>{
         }
         return height;
         }
+
     public int size(){
-    return checkSize(root);
+        return checkSize(root);
     }
 
     private int checkSize(Node<E> node){
@@ -79,11 +60,6 @@ public class BTree <E>{
         }
     }
 
-    public String path(int length){
-
-
-
-    }
 
 
 }
