@@ -39,6 +39,11 @@ public class BTree <E>{
 
     }
 
+    private int[] preorder(Node<E> node, int i){
+
+
+    }
+
     public String in(){
 
 
@@ -63,18 +68,24 @@ public class BTree <E>{
         return height;
         }
     public int size(){
+    return checkSize(root);
+    }
 
+    private int checkSize(Node<E> node){
+        if (node==null)
+            return 0;
+        else{
+            return 1+checkSize(node.getLeftSon())+checkSize(node.getRightSon());
+        }
     }
 
     public String path(int length){
 
+
+
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(root)+"\n"
-                +String.valueOf(root.getLeftSon())+"  "+String.valueOf(root.getRightSon());
-    }
+
 }
 
 
