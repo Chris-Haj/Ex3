@@ -1,16 +1,9 @@
-public class BTree <E> {
+public class BTree<E> {
     private Node<E> root;
 
 
     public BTree() {
         this.root = null;
-    }
-    public BTree(Node root) {
-        this.root=root;
-    }
-
-    public int getsum(){
-        return (int) root.getRightSon().getLeftSon().getData();
     }
 
     public void add(E d) {
@@ -18,52 +11,82 @@ public class BTree <E> {
             root = new Node<>(d);
 
             return;
-        }
-        else if (root.getLeftSon() == (null)) {
+        } else if (root.getLeftSon() == (null)) {
             root.setLeftSon(new Node<E>(d));
             return;
-        }
-        else if (root.getRightSon()  == (null)){
+        } else if (root.getRightSon() == (null)) {
             root.setRightSon(new Node<E>(d));
             return;
         }
-        addnode(root,d);
+        addnode(root, d);
 
     }
 
-    private void addnode(Node<E> node,E d) {
-        if(node.getLeftSon()==null){
+    private void addnode(Node<E> node, E d) {
+        if (node.getLeftSon() == null) {
             node.setLeftSon(new Node<>(d));
             return;
-        }
-        else if(node.getRightSon()==null){
+        } else if (node.getRightSon() == null) {
             node.setRightSon(new Node<>(d));
             return;
         }
 
-        if(Math.abs(findHeight(node.getLeftSon())-findHeight(node.getRightSon())) <=1){
-        addnode(node.getLeftSon(), d);
-        }
-        else
-        addnode(node.getRightSon(),d);
+        if (Math.abs(findHeight(node.getLeftSon()) - findHeight(node.getRightSon())) <= 1) {
+            addnode(node.getLeftSon(), d);
+        } else
+            addnode(node.getRightSon(), d);
 
     }
-    
+
+    public String post() {
+        postOrder(root);
+        return "";
+    }
+
+    private void postOrder(Node<E> node) {
+        if (node == null)
+            return;
+        else {
+            postOrder(node.getLeftSon());
+            postOrder(node.getRightSon());
+            System.out.print(node.getData() + "\t");
+        }
+    }
 
 
+    public String pre() {
+        preorder(root);
+        return "";
+    }
+
+    private void preorder(Node<E> node) {
+        if (node == null)
+            return;
+        else {
+            System.out.print(node.getData() + "\t");
+            postOrder(node.getLeftSon());
+            postOrder(node.getRightSon());
+        }
+    }
+
+    public String in() {
+        inOrder(root);
+        return "";
+    }
 
     private void inOrder(Node<E> node) {
         if (node == null) {
             return;
-        }
-        else{
-        inOrder(node.getLeftSon());
-        System.out.print(node.getData()+"\t");
-        inOrder(node.getRightSon());
+        } else {
+            inOrder(node.getLeftSon());
+            System.out.print(node.getData() + "\t");
+            inOrder(node.getRightSon());
         }
     }
-    public void in() {
-        inOrder(root);
+
+
+    public int height() {
+        return findHeight(root);
     }
 
     private int findHeight(Node node) {
@@ -73,12 +96,6 @@ public class BTree <E> {
             return 1 + Math.max(findHeight(node.getLeftSon()), findHeight(node.getRightSon()));
 
     }
-
-
-    public int height() {
-        return findHeight(root);
-    }
-
 
     public int size() {
         return checkSize(root);
@@ -92,7 +109,14 @@ public class BTree <E> {
         }
 
     }
+    public String path(int length){
+        
+    }
+    
 
+    
+    
+    
 
 
 }
